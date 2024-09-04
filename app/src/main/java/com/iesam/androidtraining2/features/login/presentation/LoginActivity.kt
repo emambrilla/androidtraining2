@@ -7,6 +7,7 @@ import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.iesam.androidtraining2.R
 import com.iesam.androidtraining2.features.login.LoginFactory
 
@@ -29,6 +30,12 @@ class LoginActivity : AppCompatActivity() {
             val userName = findViewById<EditText>(R.id.input_username).text.toString()
             val password = findViewById<EditText>(R.id.input_password).text.toString()
             loginViewModel.validateClicked(userName, password)
+            val isValid = loginViewModel.validateClicked(userName, password)
+            if (isValid){
+                Snackbar.make(findViewById(R.id.main), R.string.message_login_ok, Snackbar.LENGTH_SHORT).show()
+            } else{
+                Snackbar.make(findViewById(R.id.main), R.string.message_login_ko, Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 }
